@@ -3,8 +3,8 @@
  * Requires jQuery and includes Sizzle CSS Selector Engine
  * Some ES6 syntax and features are used in this library
  * 
- * Created 04/09/2019 - Updated 05/30/2019
- * Current version: 1.5.6
+ * Created 04/09/2019 - Updated 06/17/2019
+ * Current version: 1.5.7
 */
 (function (global, jQuery, factory) {
 
@@ -2405,7 +2405,7 @@
 
     valib.extend(valib, {
 
-        version: '1.5.6',
+        version: '1.5.7',
 
         isObject: function (obj) {
             var type = typeof obj;
@@ -2490,6 +2490,10 @@
             document.addEventListener('DOMContentLoaded', callback);
         },
 
+
+
+        /* Asynchronous network operations */
+
         /* Sends a HTTP GET request to a server for data.
             url: URL of the API from which you want to get data
             onReceive: how you want to do with the retrieved data
@@ -2557,6 +2561,9 @@
             }
         },
 
+        /* Sends a HTTP PUT request to a server to update existing data.
+           The 'specs' object here is similar to that of the ajaxPOST function
+        */
         ajaxPUT: function (specs) {
             let url = specs.url,
                 data = JSON.stringify(specs.data),
@@ -2579,6 +2586,15 @@
             }
         },
 
+        /* Sends a HTTP DELETE request to a server to delete data.
+           The 'specs' object should look like this:
+            {
+                url: '/endpoint url',
+                onSuccess: function (responseText) {
+                    // do something when the request is successful
+                }
+            }
+        */
         ajaxDELETE: function (specs) {
             let url = specs.url,
                 onSuccess = specs.onSuccess;
@@ -2639,6 +2655,7 @@
 
     valib.extend(valib, {
 
+        // Returns a 
         getParamObject: function () {
             let params = arguments.length === 0 ? getURLParams() : getURLParams(arguments[0]),
                 obj = {};
@@ -2664,7 +2681,8 @@
             return null;
         },
 
-        getURLWithParams: function (url, params) {
+        // Returns a URL with given parameters attached
+        addParamsToURL: function (url, params) {
             if (params) {
                 let totalParams = Object.keys(params).length;
                 if (totalParams > 0) {
