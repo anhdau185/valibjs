@@ -3,8 +3,8 @@
  * Requires jQuery and includes Sizzle CSS Selector Engine
  * Some ES6 syntax and features are used in this library
  * 
- * Created 04/09/2019 - Updated 06/17/2019
- * Current version: 1.5.7
+ * Created 04/09/2019 - Updated 06/23/2019
+ * Current version: 1.5.8
 */
 (function (global, jQuery, factory) {
 
@@ -2405,7 +2405,7 @@
 
     valib.extend(valib, {
 
-        version: '1.5.7',
+        version: '1.5.8',
 
         isObject: function (obj) {
             var type = typeof obj;
@@ -2418,6 +2418,14 @@
                 return false;
             }
             return true;
+        },
+
+        clone: function (obj) {
+            var result = {};
+            for (let key in obj) {
+                result[key] = obj[key];
+            }
+            return result;
         },
 
         isFunction: function (obj) {
